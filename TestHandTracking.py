@@ -24,6 +24,7 @@ def main():
         lmList = detector.findPosition(img)
         if len(lmList) != 0:
             print(lmList[10])
+            print(lmList[5])
 
         cTime = time.time()  # current time
         fps = 1 / (cTime - pTime)  # fps time calculate
@@ -33,8 +34,6 @@ def main():
         cv2.putText(img, str(int(fps)), (10, 70), cv2.FONT_HERSHEY_PLAIN, 3, (255, 0, 255), 3)
         cv2.imshow('Input', img)
         c = cv2.waitKey(1)
-        if c == 27:
-            break
 
 
 if __name__ == "__main__":

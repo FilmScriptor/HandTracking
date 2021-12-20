@@ -29,25 +29,22 @@ class handDetector():
         if self.results.multi_hand_landmarks:
             for handLms in self.results.multi_hand_landmarks:
                 if draw:
-                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS)
+                    self.mpDraw.draw_landmarks(img, handLms, self.mpHands.HAND_CONNECTIONS,
+                                               self.mpDraw.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2),
+                                               self.mpDraw.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=2))
         return img
 
     #find function
-    def findPosition(self, img, handNo=0, draw=True ):
+    def findPosition(self, img, handNo=0, draw=True):
 
         lmList = []
         if self.results.multi_hand_landmarks:
             myHand = self.results.multi_hand_landmarks[handNo]
 
             for id, lm in enumerate(myHand.landmark):
-                #print(id, lm)
                 h, w, c = img.shape
                 cx, cy = int(lm.x*w), int(lm.y*h)
                 lmList.append([id, cx, cy])
-
-                #increase the size of first landmark
-                if draw:
-                    cv2.circle(img, (cx, cy), 5, (0, 0, 255), cv2.FILLED)
 
         return lmList
 
